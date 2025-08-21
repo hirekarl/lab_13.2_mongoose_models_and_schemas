@@ -35,7 +35,7 @@ router.get("/", async (_req, res) => {
 
 // Read One
 router.get("/:id", async (req, res) => {
-  const id = req.params._id
+  const id = req.params.id
   try {
     const bookAtId = Book.findById(id)
     res.json(bookAtId)
@@ -46,11 +46,11 @@ router.get("/:id", async (req, res) => {
 
 // Update
 router.put("/:id", async (req, res) => {
-  const id = req.params._id
+  const id = req.params.id
   const updatedFields = req.body
   try {
     await Book.findByIdAndUpdate(id, updatedFields, { new: true })
-    res.status(204)
+    res.status(204).send()
   } catch (error) {
     handle400(res, error)
   }
@@ -58,10 +58,10 @@ router.put("/:id", async (req, res) => {
 
 // Delete
 router.delete("/:id", async (req, res) => {
-  const id = req.params._id
+  const id = req.params.id
   try {
     await Book.findByIdAndDelete(id)
-    res.status(204)
+    res.status(204).send()
   } catch (error) {
     handle400(res, error)
   }
