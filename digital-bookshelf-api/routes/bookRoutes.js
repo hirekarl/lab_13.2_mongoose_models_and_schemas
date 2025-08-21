@@ -35,7 +35,7 @@ router.get("/", async (_req, res) => {
 
 // Read One
 router.get("/:id", async (req, res) => {
-  const id = req.params.id
+  const id = req.params._id
   try {
     const bookAtId = Book.findById(id)
     res.json(bookAtId)
@@ -46,7 +46,7 @@ router.get("/:id", async (req, res) => {
 
 // Update
 router.put("/:id", async (req, res) => {
-  const id = req.params.id
+  const id = req.params._id
   const updatedFields = req.body
   try {
     await Book.findByIdAndUpdate(id, updatedFields, { new: true })
@@ -58,7 +58,7 @@ router.put("/:id", async (req, res) => {
 
 // Delete
 router.delete("/:id", async (req, res) => {
-  const id = req.params.id
+  const id = req.params._id
   try {
     await Book.findByIdAndDelete(id)
     res.status(204)
