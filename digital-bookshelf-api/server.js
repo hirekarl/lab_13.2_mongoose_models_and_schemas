@@ -1,3 +1,5 @@
+const path = require("path")
+
 require("dotenv").config()
 const PORT = process.env.PORT
 
@@ -8,6 +10,7 @@ const bookRoutes = require("./routes/bookRoutes")
 const connect = require("./db/connection")
 
 app.use(express.json())
+app.use(express.static(path.join(__dirname, "public")))
 app.use("/api/books", bookRoutes)
 
 app.listen(PORT, () => {
