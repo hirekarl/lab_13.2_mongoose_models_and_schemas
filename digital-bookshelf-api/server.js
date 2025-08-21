@@ -1,15 +1,14 @@
 const path = require("path")
-
 require("dotenv").config()
-const PORT = process.env.PORT
 
 const express = require("express")
-const app = express()
-
 const bookRoutes = require("./routes/bookRoutes")
 const connect = require("./db/connection")
 
-app.use(express.json())
+const PORT = process.env.PORT || 3001
+
+const app = express()
+
 app.use(express.static(path.join(__dirname, "public")))
 app.use("/api/books", bookRoutes)
 
