@@ -1,7 +1,4 @@
-const path = require("path")
-require("dotenv").config({ path: path.resolve(__dirname, "../.env") })
-
-const MONGO_URI = process.env.MONGO_URI
+const { MONGO_URI } = require("../utils/index")
 
 const mongoose = require("mongoose")
 

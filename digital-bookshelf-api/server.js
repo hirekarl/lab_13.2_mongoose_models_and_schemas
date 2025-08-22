@@ -1,11 +1,9 @@
 const path = require("path")
-require("dotenv").config()
-
 const express = require("express")
+
 const bookRoutes = require("./routes/bookRoutes")
 const connect = require("./db/connection")
-
-const PORT = process.env.PORT || 3001
+const { PORT } = require("./utils")
 
 const app = express()
 
