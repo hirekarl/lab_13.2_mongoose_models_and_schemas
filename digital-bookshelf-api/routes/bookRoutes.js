@@ -3,27 +3,24 @@ const router = express.Router()
 
 const Book = require("../models/Book")
 
-router.use(express.json())
-
 // Utility
 const handle400 = (res, error) => {
   console.error(error)
-  res.status(400).json({ error: "Bad Request", message: error })
+  res.status(400).send({ error: "There was a problem with your request!" })
 }
 
-// Create
+// Route: Create
 router.post("/", async (req, res) => {
-  const newBook = req.body
+  const bookToCreate = req.body
   try {
-    await Book.create(newBook)
-    const foundBook = await Book.find({ isbn: newBook.isbn })
-    res.status(201).json(foundBook)
+    const newBook = await Book.create(bookToCreate)
+    res.status(201).json(newBook)
   } catch (error) {
     handle400(res, error)
   }
 })
 
-// Read All
+// Route: Read All
 router.get("/", async (_req, res) => {
   try {
     const allBooks = await Book.find({})
@@ -33,18 +30,18 @@ router.get("/", async (_req, res) => {
   }
 })
 
-// Read One
+// Route: Read One
 router.get("/:id", async (req, res) => {
   const id = req.params.id
   try {
-    const bookAtId = Book.findById(id)
+    const bookAtId = await Book.findById(id)
     res.json(bookAtId)
   } catch (error) {
     handle400(res, error)
   }
 })
 
-// Update
+// Route: Update
 router.put("/:id", async (req, res) => {
   const id = req.params.id
   const updatedFields = req.body
@@ -56,7 +53,7 @@ router.put("/:id", async (req, res) => {
   }
 })
 
-// Delete
+// Route: Delete
 router.delete("/:id", async (req, res) => {
   const id = req.params.id
   try {
