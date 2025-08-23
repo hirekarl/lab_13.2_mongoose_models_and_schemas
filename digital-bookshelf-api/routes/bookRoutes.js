@@ -46,7 +46,7 @@ router.put("/:id", async (req, res) => {
   const id = req.params.id
   const updatedFields = req.body
   try {
-    await Book.findByIdAndUpdate(id, updatedFields, { new: true })
+    await Book.findByIdAndUpdate(id, updatedFields)
     res.sendStatus(204)
   } catch (error) {
     handle400(res, error)
