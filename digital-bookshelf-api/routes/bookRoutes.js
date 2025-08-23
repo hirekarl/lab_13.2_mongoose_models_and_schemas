@@ -6,7 +6,7 @@ const Book = require("../models/Book")
 // Utility
 const handle400 = (res, error) => {
   console.error(error)
-  res.status(400).send({ error: "There was a problem with your request!" })
+  res.status(400).json({ error: "There was a problem with your request!" })
 }
 
 // Route: Create
@@ -47,7 +47,7 @@ router.put("/:id", async (req, res) => {
   const updatedFields = req.body
   try {
     await Book.findByIdAndUpdate(id, updatedFields, { new: true })
-    res.status(204).send()
+    res.sendStatus(204)
   } catch (error) {
     handle400(res, error)
   }
@@ -58,7 +58,7 @@ router.delete("/:id", async (req, res) => {
   const id = req.params.id
   try {
     await Book.findByIdAndDelete(id)
-    res.status(204).send()
+    res.sendStatus(204)
   } catch (error) {
     handle400(res, error)
   }
